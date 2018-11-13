@@ -6,6 +6,7 @@ import kr.or.ddit.common.RootContext;
 import org.junit.Test;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -25,12 +26,62 @@ public class BoardDaoTest extends RootContext {
 	private BoardDaoInf boardDao;
 
 	@Test
-	public void listBoard() {
+	public void selectAllBoard() {
 		/*** Given ***/
 
 		/*** When ***/
-		List<BoardVo> listBoard = boardDao.listBoard();
+		List<BoardVo> listBoard = boardDao.selectAllBoard();
 		/*** Then ***/
 		assertEquals(4,listBoard.size());
+	}
+
+	@Test
+	public void selectBoard() {
+		/*** Given ***/
+
+		/*** When ***/
+		BoardVo boardVo = boardDao.selectBoard("1");
+		/*** Then ***/
+		assertEquals("Y",boardVo.getBd_use());
+	}
+
+	@Test
+	public void createBoard() {
+		/*** Given ***/
+		BoardVo boardVo = new BoardVo();
+		boardVo.setBd_no("10");
+		boardVo.setBd_name("테스트 게시판입니다.");
+		boardVo.setBd_use("Y");
+		boardVo.setBd_creator("1");
+		boardVo.setBd_rdate(new Date());
+		/*** When ***/
+		int resultCnt = boardDao.createBoard(boardVo);
+		/*** Then ***/
+		assertEquals(1,resultCnt);
+	}
+
+	@Test
+	public void editBoard() {
+		/*** Given ***/
+		BoardVo boardVo = new BoardVo();
+		boardVo.setBd_no("1");
+		boardVo.setBd_name("테스트 게시판입니다.");
+		boardVo.setBd_use("Y");
+		boardVo.setBd_creator("1");
+		boardVo.setBd_rdate(new Date());
+		/*** When ***/
+		int resultCnt = boardDao.editBoard(boardVo);
+		/*** Then ***/
+		assertEquals(1,resultCnt);
+	}
+
+	@Test
+	public void deleteBoard() {
+		/*** Given ***/
+
+		/*** When ***/
+		int resultCnt = boardDao.deleteBoard("자유게시판");
+		/*** Then ***/
+		assertEquals(1,resultCnt);
 	}
 }

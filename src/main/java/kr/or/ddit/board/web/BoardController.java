@@ -25,7 +25,7 @@ public class BoardController {
 
 	@GetMapping("/boardController")
 	public String boardController (Model model) {
-		model.addAttribute("listBoard",boardService.listBoard());
+		model.addAttribute("listBoard",boardService.selectAllBoard());
 		return "boardController";
 	}
 

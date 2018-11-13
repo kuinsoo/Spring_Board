@@ -33,7 +33,7 @@ public class MainController {
 
 	@PostMapping("/main")
 	public String main(Model model, MemberVo memberVo) {
-		List<BoardVo> listBoard = boardService.listBoard();
+		List<BoardVo> listBoard = boardService.selectAllBoard();
 		model.addAttribute("listBoard", listBoard);
 //		model.addAttribute("userVo", userVo);
 		return "main";

@@ -26,7 +26,27 @@ public class BoardService implements BoardServiceInf {
 	private BoardDaoInf boardDao;
 
 	@Override
-	public List<BoardVo> listBoard() {
-		return boardDao.listBoard();
+	public List<BoardVo> selectAllBoard() {
+		return boardDao.selectAllBoard();
+	}
+
+	@Override
+	public BoardVo selectBoard(String boardId) {
+		return boardDao.selectBoard(boardId);
+	}
+
+	@Override
+	public int createBoard(BoardVo boardVo) {
+		return boardDao.createBoard(boardVo);
+	}
+
+	@Override
+	public int editBoard(BoardVo boardVo) {
+		return boardDao.editBoard(boardVo);
+	}
+
+	@Override
+	public int deleteBoard(String boardId) {
+		return boardDao.deleteBoard(boardId);
 	}
 }

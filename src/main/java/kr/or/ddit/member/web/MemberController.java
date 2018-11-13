@@ -43,7 +43,7 @@ public class MemberController {
 
 		if(chkMemberVo != null && chkMemberVo.getMem_pass().equals(KISA_SHA256.encrypt(memberVo.getMem_pass()))) {
 			model.addAttribute("memberVo",chkMemberVo);
-			model.addAttribute("listBoard", boardService.listBoard() );
+			model.addAttribute("listBoard", boardService.selectAllBoard() );
 			return "main";
 		} else {
 			return "common/index";

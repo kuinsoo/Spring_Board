@@ -14,5 +14,36 @@ import java.util.List;
  * @Version :
  */
 public interface BoardDaoInf {
-	List<BoardVo> listBoard();
+	/**
+	 * 전체 게시판 조회
+	 * @return
+	 */
+	List<BoardVo> selectAllBoard();
+
+	/**
+	 * 게시판 조회
+	 * @return
+	 */
+	BoardVo selectBoard(String boardId);
+
+	/**
+	 * 게시판 생성
+	 * @param boardVo
+	 * @return
+	 */
+	int createBoard(BoardVo boardVo);
+
+	/**
+	 * 게시판 수정
+	 * @param boardVo
+	 * @return
+	 */
+	int editBoard(BoardVo boardVo);
+
+	/**
+	 * 게시판 삭제 ( Create Board 후 삭제 작업을 위해 만들어진 메서드 )
+	 * @param boardId
+	 * @return
+	 */
+	int deleteBoard(String boardId);
 }

@@ -27,7 +27,27 @@ public class BoardDao implements BoardDaoInf {
 	private SqlSessionTemplate template;
 
 	@Override
-	public List<BoardVo> listBoard() {
-		return template.selectList("board.listBoard");
+	public List<BoardVo> selectAllBoard() {
+		return template.selectList("board.selectAllBoard");
+	}
+
+	@Override
+	public BoardVo selectBoard(String boardId) {
+		return template.selectOne("board.selectBoard",boardId);
+	}
+
+	@Override
+	public int createBoard(BoardVo boardVo) {
+		return template.insert("board.createBoard",boardVo);
+	}
+
+	@Override
+	public int editBoard(BoardVo boardVo) {
+		return template.update("board.editBoard",boardVo);
+	}
+
+	@Override
+	public int deleteBoard(String boardId) {
+		return template.delete("board.deleteBoard",boardId);
 	}
 }
