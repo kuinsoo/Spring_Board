@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,19 +24,9 @@ import java.util.List;
 @Controller
 public class MainController {
 
-	@Resource(name = "boardService")
-	private BoardServiceInf boardService;
-
-	@GetMapping("/index")
+	@RequestMapping(value = "/")
 	public String index() {
 		return "common/index";
 	}
 
-	@PostMapping("/main")
-	public String main(Model model, MemberVo memberVo) {
-		List<BoardVo> listBoard = boardService.selectAllBoard();
-		model.addAttribute("listBoard", listBoard);
-//		model.addAttribute("userVo", userVo);
-		return "main";
-	}
 }

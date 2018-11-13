@@ -5,20 +5,21 @@
   Time: 오후 3:20
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <table class="kku-tableCenter">
-    <tr>
-        <th><input type="text" name="bd_name" placeholder="게시판이름입력"/></th>
-        <th>
-            <select>
-                <option value="Y">Y</option>
-                <option value="N">N</option>
-            </select>
-        </th>
-        <th> <input type="button" id="create" value="생성" ></th>
-    </tr>
-
+    <form action="/createBoard" method="post">
+        <tr>
+            <th><input type="text" name="bd_name" placeholder="게시판이름입력"/></th>
+            <th>
+                <select name="bd_use">
+                    <option value="Y">Y</option>
+                    <option value="N">N</option>
+                </select>
+            </th>
+            <th> <input type="submit" value="생성" ></th>
+        </tr>
+    </form>
 
 </table>
 <hr/>

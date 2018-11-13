@@ -9,24 +9,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 /**
  * kr.or.ddit.user.web
  * null.java
- * Desc :
+ * Desc : 회원 컨트롤러
  *
  * @Author : Mr.KKu
  * @Date : 2018-11-13 / 오전 10:16
  * @Version :
  */
 @Controller
-@SessionAttributes("memberVo")
+@SessionAttributes(names = {"memberVo","listBoard"})
 public class MemberController {
 
 	 private Logger logger = LoggerFactory.getLogger(MemberController.class);
@@ -37,7 +34,7 @@ public class MemberController {
 	private BoardServiceInf boardService;
 
 
-	@PostMapping("/searchUser")
+	@PostMapping(value = "/searchUser")
 	public String searchUser(Model model, MemberVo memberVo) {
 		MemberVo chkMemberVo  = memberService.selectMember(memberVo.getMem_id());
 

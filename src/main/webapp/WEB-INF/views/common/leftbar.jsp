@@ -5,11 +5,12 @@
   Time: 오후 8:01
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="kku-mainSidebar kku-floatLeft kku-boarder">
     <ul class="kku-styleNone kku-boarderUl">
-        <li >게시판 목록</li>
+        <li >${memberVo.mem_name}게시판 목록</li>
         <li ><a href="/boardController">+추가</a></li>
     </ul>
 
