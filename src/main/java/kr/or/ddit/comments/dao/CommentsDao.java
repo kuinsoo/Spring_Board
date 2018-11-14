@@ -46,8 +46,8 @@ public class CommentsDao implements CommentsDaoInf {
 	 */
 	@Override
 	public int insertCmt(CommentsVo cmtVo) {
-		int resultCnt = template.insert("cmt.insertCmt",cmtVo);
-		return resultCnt;
+		return template.insert("cmt.insertCmt",cmtVo);
+
 	}
 
 	/**

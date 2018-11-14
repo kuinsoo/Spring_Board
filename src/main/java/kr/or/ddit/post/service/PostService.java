@@ -59,4 +59,9 @@ public class PostService implements PostServiceInf {
 	public int createRePost(PostVo postVo) {
 		return dao.createRePost(postVo);
 	}
+
+	@Override
+	public int editDelPost(PostVo postVo) {
+		return dao.editDelPost(postVo);
+	}
 }

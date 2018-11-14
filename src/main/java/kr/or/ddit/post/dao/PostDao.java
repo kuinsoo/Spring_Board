@@ -97,4 +97,10 @@ public class PostDao implements PostDaoInf{
 		int resultCnt = template.insert("post.createRePost",postVo);
 		return  resultCnt;
 	}
+
+
+	@Override
+	public int editDelPost(PostVo postVo) {
+		return template.update("post.editDelPost",postVo);
+	}
 }

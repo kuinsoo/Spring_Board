@@ -55,6 +55,8 @@ public interface PostDaoInf {
 	 */
 	int deletePost(String post_no);
 
+	int editDelPost(PostVo postVo);
+
 	/**
 	 * 게시판 답글 생성
 	 * @param postVo

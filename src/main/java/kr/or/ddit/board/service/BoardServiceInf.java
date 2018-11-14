@@ -40,6 +40,8 @@ public interface BoardServiceInf {
 	 */
 	int editBoard(BoardVo boardVo);
 
+
+
 	/**
 	 * 게시판 삭제 ( Create Board 후 삭제 작업을 위해 만들어진 메서드 )
 	 * @param boardId

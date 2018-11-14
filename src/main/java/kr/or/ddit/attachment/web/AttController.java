@@ -1,6 +1,8 @@
 package kr.or.ddit.attachment.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * kr.or.ddit.attachment.web
@@ -14,5 +16,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class AttController {
+
+
 
 }

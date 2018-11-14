@@ -28,7 +28,15 @@
     <c:forEach items="${postList}" var="postVo">
         <tr class="table-primary tbodyTr">
             <th scope="row">${postVo.post_rnum}</th>
-            <td> <a href="/postDetail?postNo=${postVo.post_no}&no=${post_groupno}" style="cursor: pointer; text-decoration:none;" >${postVo.post_sub}</a></td>
+            <c:choose>
+                <c:when test="${postVo.post_writer == null}">
+                    <td>${postVo.post_sub}</td>
+                </c:when>
+                <c:otherwise>
+                    <td> <a href="/postDetail?postNo=${postVo.post_no}&no=${post_groupno}"  style="cursor: pointer; text-decoration:none;" >${postVo.post_sub}</a></td>
+                </c:otherwise>
+
+            </c:choose>
             <td>${postVo.getPost_writer()}</td>
             <td><fmt:formatDate value="${postVo.getPost_rdate()}" /></td>
         </tr>

@@ -55,6 +55,8 @@ public interface PostServiceInf {
 	 */
 	int deletePost(String post_no);
 
+	int editDelPost(PostVo postVo);
+
 	/**
 	 * 게시글 답글 생성
 	 * @param postVo

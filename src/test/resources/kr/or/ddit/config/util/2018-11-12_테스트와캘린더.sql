@@ -116,6 +116,10 @@ delete from board;
 -- inset 구문은 만들어준다.
 select 'insert into board values (''' || no || ''',''' || name
 || ''',''' || use|| ''',''' || creator|| ''',''' || rdate|| ''');'
+from board;
+
+
+
 
 
 

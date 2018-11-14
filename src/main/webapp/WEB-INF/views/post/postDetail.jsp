@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 
@@ -26,6 +27,11 @@
         $('#editPost').click(function () {
 	        location.href ="/postUpdate?postNo=${postVo.post_no}&bd_no=${no}";
         });
+
+		$('#deletePost').click(function () {
+			location.href ="/postDelete?postNo=${postVo.post_no}&bd_no=${no}";
+
+		});
 
 		// Editor Setting
 		nhn.husky.EZCreator.createInIFrame({
@@ -48,7 +54,7 @@
 			switch (select) {
                 case 1:
 	                var content = $('#insertCmtText').val();
-	                location.href = "/insertCmt?postno=${postVo.getPost_no()}&content=" + content + "&writer=${memberVo.getMem_id()}";
+	                location.href = "/insertCmt?postno=${postVo.post_no}&content=" + content + "&writer=${memberVo.mem_id}&bd_no=${no}";
                 	break;
 				case 2:
 					var content = document.getElementById("updateCmtText"+num).value;
@@ -105,18 +111,22 @@
         </div>
         <div style="text-align: right; padding-bottom: 35px">
             <button type="button" class="btn btn-outline-info" id="rePost">답글</button>
-            <c:if test="${postVo.getPost_writer() eq memberVo.getMem_id()}">
+            <c:if test="${postVo.getPost_writer() eq memberVo.mem_id}">
                 <button type="button" class="btn btn-outline-warning" id="editPost">수정</button>
-                <button type="button" class="btn btn-outline-danger">삭제</button>
+                <button type="button" class="btn btn-outline-danger" id="deletePost">삭제</button>
             </c:if>
         </div>
     </div>
 
+    <div class="divForm" style="padding: 10px 0px 20px 0px; border-top: solid 1px wheat">
+        <input type="text" class="replyForm" value="" id="insertCmtText">
+        <button type="button" class="btn replyBtn btn-outline-success" onclick="cmtController(1)" >등록</button>
+    </div>
     <%-- 답글 영역 --%>
     <c:forEach items="${cmtList}" var="cmtVo" varStatus="i">
         <div class="divForm" style="padding-top: 10px; border-top: solid 1px wheat">
             <c:choose >
-                <c:when test="${cmtVo.cmt_writer eq memberVo.getMem_id()}" >
+                <c:when test="${cmtVo.cmt_writer eq memberVo.mem_id}" >
                     <input type="text" class="replyForm" value="${cmtVo.cmt_content}" id="updateCmtText${i.index}" />
                     <button type="button" class="btn replyBtn btn-outline-warning" onclick="cmtController(2, ${cmtVo.cmt_no}, ${i.index})" >수정</button>
                     <button type="button" class="btn replyBtn btn-outline-danger" onclick="cmtController(3, ${cmtVo.cmt_no})" >삭제</button>
@@ -128,9 +138,6 @@
 
         </div>
     </c:forEach>
-    <div class="divForm" style="padding: 10px 0px 20px 0px; border-top: solid 1px wheat">
-        <input type="text" class="replyForm" value="" id="insertCmtText">
-        <button type="button" class="btn replyBtn btn-outline-success" onclick="cmtController(1)" >등록</button>
-    </div>
+
 </div>
 </form>
