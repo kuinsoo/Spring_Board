@@ -25,7 +25,8 @@ import org.springframework.web.context.WebApplicationContext;
 @ContextConfiguration(locations = {
 		"classpath:kr/or/ddit/config/spring/root-context.xml",
 		"classpath:kr/or/ddit/config/spring/datasource-test-context.xml",
-		"classpath:kr/or/ddit/config/spring/context-servlet.xml"
+		"classpath:kr/or/ddit/config/spring/context-servlet.xml",
+		"classpath:kr/or/ddit/config/spring/transaction-context.xml"
 })
 @WebAppConfiguration
 public class ContextServlet {

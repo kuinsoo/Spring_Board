@@ -3,6 +3,7 @@ package kr.or.ddit.member.service;
 import kr.or.ddit.member.dao.MemberDaoInf;
 import kr.or.ddit.member.model.MemberVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
  * @Version :
  */
 @Service
+@Transactional
 public class MemberService implements MemberServiceInf {
 
 	@Resource(name = "memberDao")

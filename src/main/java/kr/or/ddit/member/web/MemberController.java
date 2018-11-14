@@ -23,7 +23,7 @@ import javax.annotation.Resource;
  * @Version :
  */
 @Controller
-@SessionAttributes(names = {"memberVo","listBoard"})
+@SessionAttributes(names = {"memberVo"})
 public class MemberController {
 
 	 private Logger logger = LoggerFactory.getLogger(MemberController.class);

@@ -15,4 +15,11 @@
         <put-attribute name="content" value="/WEB-INF/views/board/boardController.jsp" />
     </definition>
 
+    <definition name="postList" extends="basicLayout">
+        <put-attribute name="content" value="/WEB-INF/views/post/postList.jsp" />
+    </definition>
+    <definition name="postDetail" extends="basicLayout">
+        <put-attribute name="content" value="/WEB-INF/views/post/postDetail.jsp" />
+    </definition>
+
 </tiles-definitions>

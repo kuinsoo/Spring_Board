@@ -11,6 +11,9 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
+    <!-- json view -->
+    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+
     <!-- tiles view resolver -->
     <bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
         <property name="order" value="3"/>
@@ -24,6 +27,7 @@
             </list>
         </property>
     </bean>
+
 
     <!--  jsp 설정 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

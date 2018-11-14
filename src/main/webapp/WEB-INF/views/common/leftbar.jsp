@@ -17,7 +17,7 @@
     <ul>
         <c:forEach items="${listBoard }" var="board" varStatus="i">
             <c:if test="${board.bd_use == 'Y'}">
-                <li>${board.bd_name}</li>
+                <li><a href="/postList?bd_no=${board.bd_no}&page=1&pageSize=10">${board.bd_name}</a></li>
             </c:if>
         </c:forEach>
     </ul>

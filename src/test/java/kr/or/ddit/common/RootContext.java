@@ -33,7 +33,8 @@ import javax.sql.DataSource;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 		"classpath:kr/or/ddit/config/spring/root-context.xml",
-		"classpath:kr/or/ddit/config/spring/datasource-test-context.xml"
+		"classpath:kr/or/ddit/config/spring/datasource-test-context.xml",
+		"classpath:kr/or/ddit/config/spring/transaction-context.xml"
 })
 @WebAppConfiguration
 public class RootContext {

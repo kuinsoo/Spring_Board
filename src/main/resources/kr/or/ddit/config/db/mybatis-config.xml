@@ -8,10 +8,12 @@
     <typeAliases>
         <typeAlias type="kr.or.ddit.member.model.MemberVo" alias="memberVo"/>
         <typeAlias type="kr.or.ddit.board.model.BoardVo" alias="boardVo"/>
+        <typeAlias type="kr.or.ddit.post.model.PostVo" alias="postVo"/>
     </typeAliases>
 
     <mappers>
         <mapper resource="kr/or/ddit/config/db/member.xml"/>
         <mapper resource="kr/or/ddit/config/db/board.xml"/>
+        <mapper resource="kr/or/ddit/config/db/post.xml"/>
     </mappers>
 </configuration>

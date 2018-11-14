@@ -3,12 +3,16 @@ package kr.or.ddit.board.web;
 import kr.or.ddit.board.model.BoardVo;
 import kr.or.ddit.board.service.BoardServiceInf;
 import kr.or.ddit.member.model.MemberVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 
 /**
  * kr.or.ddit.user.board.web
@@ -26,18 +30,25 @@ public class BoardController {
 	private BoardServiceInf boardService;
 
 	@RequestMapping(value="/boardController")
-	public String boardController () {
+	public String boardController (Model model) {
+		model.addAttribute("listBoard",boardService.selectAllBoard());
 		return "boardController";
 	}
-
-
-
 
 	@PostMapping(value = "/createBoard")
 	public String createBoard(Model model, BoardVo boardVo, @SessionAttribute("memberVo")MemberVo memberVo ) {
 		boardVo.setBd_creator(memberVo.getMem_id());
 		boardService.createBoard(boardVo);
-		return "main";
+		model.addAttribute("listBoard",boardService.selectAllBoard());
+		return "boardController";
+	}
+
+	@RequestMapping(value = "/editBoard")
+	public String editBoard(Model model, BoardVo boardVo, @SessionAttribute("memberVo")MemberVo memberVo ) throws UnsupportedEncodingException {
+		boardVo.setBd_creator((memberVo.getMem_id()));
+		boardService.editBoard(boardVo);
+		model.addAttribute("listBoard",boardService.selectAllBoard());
+		return "boardController";
 	}
 
 }
