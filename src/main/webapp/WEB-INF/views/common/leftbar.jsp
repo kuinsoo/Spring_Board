@@ -12,6 +12,7 @@
     <ul class="kku-styleNone kku-boarderUl">
         <li >${memberVo.mem_name}게시판 목록</li>
         <li ><a href="/boardController">+추가</a></li>
+        <li ><a href="/main">메인 가즈아!</a></li>
     </ul>
 
     <ul>

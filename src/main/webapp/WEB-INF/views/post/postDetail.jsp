@@ -20,11 +20,11 @@
 		});
 
         $('#rePost').click(function () {
-           location.href ="/postWrite?recursion=${postVo.getPost_no()}&no=${no}";
+	        location.href ="/postWrite?bd_no=${no}&recursion=${postVo.post_no}";
         });
 
         $('#editPost').click(function () {
-	        location.href ="/postUpdate?postNo=${postVo.getPost_no()}&no=${no}";
+	        location.href ="/postUpdate?postNo=${postVo.post_no}&bd_no=${no}";
         });
 
 		// Editor Setting
@@ -78,59 +78,59 @@
         height: 31px
     }
 </style>
-<%--<form action="/postCreate" method="post" id="frm" enctype="multipart/form-data">--%>
-<%--<div>--%>
-    <%--<div class="form-group divForm">--%>
-        <%--<fieldset>--%>
-            <%--<label class="control-label" for="readOnlyInput">제목</label>--%>
-            <%--<input class="form-control" id="readOnlyInput" type="text"  value="${postVo.getPost_title()}" />--%>
-        <%--</fieldset>--%>
-    <%--</div>--%>
-    <%--&lt;%&ndash; 내용 영역 &ndash;%&gt;--%>
-    <%--<div class="form-group" >--%>
-        <%--<label for="smarteditor">내용</label>--%>
-        <%--<textarea name="smarteditor" id="smarteditor" rows="10" cols="100" style="width:766px; height:412px;"  >${postVo.getPost_content()}</textarea>--%>
-    <%--</div>--%>
+<form action="/postCreate" method="post" id="frm" enctype="multipart/form-data">
+<div class="kku-floatLeft">
+    <div class="form-group divForm">
+        <fieldset>
+            <label class="control-label" for="readOnlyInput">제목</label>
+            <input class="form-control" id="readOnlyInput" type="text"  value="${postVo.getPost_title()}" />
+        </fieldset>
+    </div>
+    <%-- 내용 영역 --%>
+    <div class="form-group" >
+        <label for="smarteditor">내용</label>
+        <textarea name="smarteditor" id="smarteditor" rows="10" cols="100" style="width:766px; height:412px;"  >${postVo.getPost_content()}</textarea>
+    </div>
 
-    <%--&lt;%&ndash; 버튼 영역 &ndash;%&gt;--%>
-    <%--<div  class="divForm">--%>
-        <%--<div style="width:766px;" >--%>
-            <%--<label>File input</label>--%>
-            <%--<div id="fileForm" class="form-group" style="width:450px; float: left;">--%>
-                <%--<input type="file"  name="attach" class="form-control-file" id="" aria-describedby="fileHelp" multiple />--%>
-            <%--</div>--%>
-            <%--<div>--%>
-                <%--<button type="button" id="attachAdd"> 파일첨부추가</button>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div style="text-align: right; padding-bottom: 35px">--%>
-            <%--<button type="button" class="btn btn-outline-info" id="rePost">답글</button>--%>
-            <%--<c:if test="${postVo.getPost_writer() eq memberVo.getMem_id()}">--%>
-                <%--<button type="button" class="btn btn-outline-warning" id="editPost">수정</button>--%>
-                <%--<button type="button" class="btn btn-outline-danger">삭제</button>--%>
-            <%--</c:if>--%>
-        <%--</div>--%>
-    <%--</div>--%>
+    <%-- 버튼 영역 --%>
+    <div  class="divForm">
+        <div style="width:766px;" >
+            <label>File input</label>
+            <div id="fileForm" class="form-group" style="width:450px; float: left;">
+                <input type="file"  name="attach" class="form-control-file" id="" aria-describedby="fileHelp" multiple />
+            </div>
+            <div>
+                <button type="button" id="attachAdd"> 파일첨부추가</button>
+            </div>
+        </div>
+        <div style="text-align: right; padding-bottom: 35px">
+            <button type="button" class="btn btn-outline-info" id="rePost">답글</button>
+            <c:if test="${postVo.getPost_writer() eq memberVo.getMem_id()}">
+                <button type="button" class="btn btn-outline-warning" id="editPost">수정</button>
+                <button type="button" class="btn btn-outline-danger">삭제</button>
+            </c:if>
+        </div>
+    </div>
 
-    <%--&lt;%&ndash; 답글 영역 &ndash;%&gt;--%>
-    <%--<c:forEach items="${cmtList}" var="cmtVo" varStatus="i">--%>
-        <%--<div class="divForm" style="padding-top: 10px; border-top: solid 1px wheat">--%>
-            <%--<c:choose >--%>
-                <%--<c:when test="${cmtVo.cmt_writer eq memberVo.getMem_id()}" >--%>
-                    <%--<input type="text" class="replyForm" value="${cmtVo.cmt_content}" id="updateCmtText${i.index}" />--%>
-                    <%--<button type="button" class="btn replyBtn btn-outline-warning" onclick="cmtController(2, ${cmtVo.cmt_no}, ${i.index})" >수정</button>--%>
-                    <%--<button type="button" class="btn replyBtn btn-outline-danger" onclick="cmtController(3, ${cmtVo.cmt_no})" >삭제</button>--%>
-                <%--</c:when>--%>
-                <%--<c:otherwise>--%>
-                    <%--<input type="text" class="replyForm" value="${cmtVo.cmt_content}" readonly="readonly" style="background: #d6c9a7;" />--%>
-                <%--</c:otherwise>--%>
-            <%--</c:choose>--%>
+    <%-- 답글 영역 --%>
+    <c:forEach items="${cmtList}" var="cmtVo" varStatus="i">
+        <div class="divForm" style="padding-top: 10px; border-top: solid 1px wheat">
+            <c:choose >
+                <c:when test="${cmtVo.cmt_writer eq memberVo.getMem_id()}" >
+                    <input type="text" class="replyForm" value="${cmtVo.cmt_content}" id="updateCmtText${i.index}" />
+                    <button type="button" class="btn replyBtn btn-outline-warning" onclick="cmtController(2, ${cmtVo.cmt_no}, ${i.index})" >수정</button>
+                    <button type="button" class="btn replyBtn btn-outline-danger" onclick="cmtController(3, ${cmtVo.cmt_no})" >삭제</button>
+                </c:when>
+                <c:otherwise>
+                    <input type="text" class="replyForm" value="${cmtVo.cmt_content}" readonly="readonly" style="background: #d6c9a7;" />
+                </c:otherwise>
+            </c:choose>
 
-        <%--</div>--%>
-    <%--</c:forEach>--%>
-    <%--<div class="divForm" style="padding: 10px 0px 20px 0px; border-top: solid 1px wheat">--%>
-        <%--<input type="text" class="replyForm" value="" id="insertCmtText">--%>
-        <%--<button type="button" class="btn replyBtn btn-outline-success" onclick="cmtController(1)" >등록</button>--%>
-    <%--</div>--%>
-<%--</div>--%>
-<%--</form>--%>
+        </div>
+    </c:forEach>
+    <div class="divForm" style="padding: 10px 0px 20px 0px; border-top: solid 1px wheat">
+        <input type="text" class="replyForm" value="" id="insertCmtText">
+        <button type="button" class="btn replyBtn btn-outline-success" onclick="cmtController(1)" >등록</button>
+    </div>
+</div>
+</form>

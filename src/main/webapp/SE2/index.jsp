@@ -18,7 +18,6 @@
 	var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함.
 
 	$(document).ready(function() {
-
 		$("#attachAdd").click(function() {
 
 //html태그중 id가 attachAdd를 클릭한다면
@@ -89,17 +88,17 @@
 
 </style>
 
-<form action="/postCreate?no=${no}" method="post" id="frm" enctype="multipart/form-data">
+<form action="/postCreate?bd_no=${bd_no}" method="POST" id="frm"  class="kku-floatLeft">
 	<div class="form-group">
 		<label class="col-form-label" for="inputDefault">제목</label>
-		<input type="text" class="form-control" name="pc_title" placeholder="제목" id="inputDefault">
+		<input type="text" class="form-control" name="post_title" placeholder="제목" id="inputDefault">
 	</div>
 
 	<textarea name="smarteditor" id="smarteditor" rows="10" cols="100" style="width:766px; height:412px;"></textarea>
 	<div style="width:766px;" >
 		<label>File input</label>
 		<div id="fileForm" class="form-group" style="width:600px; float: left;">
-			<input type="file"  name="attach" class="form-control-file" id="" aria-describedby="fileHelp" multiple />
+			<input type="file"  name="attach" class="form-control-file" id="" aria-describedby="fileHelp" />
 		</div>
 		<div>
 			<button type="button" id="attachAdd"> 파일첨부추가</button>

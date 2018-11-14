@@ -10,7 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script>
 	function createPost() {
-		location.href= "/postWrite?no=${post_groupno}&recursion="
+		location.href= "/postWrite?bd_no=${post_groupno}&recursion="
 	}
 </script>
 <table class="table table-hover">
@@ -48,7 +48,7 @@
                         </c:when>
                         <c:otherwise>
                             <li class="page-item">
-                                <a class="page-link" href="/post?no=${post_groupno}&page=${page-1}&pageSize=10">&laquo;</a>
+                                <a class="page-link" href="/postList?bd_no=${post_groupno}&page=${page-1}&pageSize=10">&laquo;</a>
                             </li>
                         </c:otherwise>
                     </c:choose>
@@ -60,13 +60,13 @@
                         <c:choose>
                             <c:when test="${page eq i.index}">
                                 <li class="page-item active">
-                                    <a class="page-link" href="/post?no=${post_groupno}&page=${i.index}&pageSize=10">${i.index}</a>
+                                    <a class="page-link" href="/postList?bd_no=${post_groupno}&page=${i.index}&pageSize=10">${i.index}</a>
                                 </li>
                             </c:when>
 
                             <c:when test="${page ne i.index}">
                                 <li class="page-item">
-                                    <a class="page-link" href="/post?no=${post_groupno}&page=${i.index}&pageSize=10">${i.index}</a>
+                                    <a class="page-link" href="/postList?bd_no=${post_groupno}&page=${i.index}&pageSize=10">${i.index}</a>
                                 </li>
                             </c:when>
                         </c:choose>
@@ -81,7 +81,7 @@
                         </c:when>
                         <c:otherwise>
                             <li class="page-item">
-                                <a class="page-link" href="/post?no=${post_groupno}&page=${page+1}&pageSize=10">&raquo;</a>
+                                <a class="page-link" href="/postList?bd_no=${post_groupno}&page=${page+1}&pageSize=10">&raquo;</a>
                             </li>
                         </c:otherwise>
                     </c:choose>

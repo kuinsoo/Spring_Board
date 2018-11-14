@@ -89,10 +89,10 @@
 
 </style>
 
-<form action="/postEdit?no=${no}&postNo=${postVo.post_no}" method="post" id="frm" enctype="multipart/form-data">
+<form action="/postEdit?no=${no}&postNo=${postVo.post_no}" method="post" id="frm">
 	<div class="form-group">
 		<label class="col-form-label" for="inputDefault">제목</label>
-		<input type="text" class="form-control" name="pc_title" placeholder="제목" id="inputDefault" value="${postVo.post_title}">
+		<input type="text" class="form-control" name="post_title" placeholder="제목" id="inputDefault" value="${postVo.post_title}">
 	</div>
 
 	<textarea name="smarteditor" id="smarteditor" rows="10" cols="100" style="width:766px; height:412px;">${postVo.post_content}</textarea>

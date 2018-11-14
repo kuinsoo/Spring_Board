@@ -34,9 +34,9 @@ public class MainController {
 	}
 
 	@RequestMapping("/main")
-	public String main() {
-		boardService.selectAllBoard();
-		return "common/index";
+	public String main(Model model) {
+		model.addAttribute("listBoard",boardService.selectAllBoard());
+		return "main";
 	}
 
 

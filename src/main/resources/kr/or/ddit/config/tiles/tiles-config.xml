@@ -18,8 +18,18 @@
     <definition name="postList" extends="basicLayout">
         <put-attribute name="content" value="/WEB-INF/views/post/postList.jsp" />
     </definition>
+
     <definition name="postDetail" extends="basicLayout">
         <put-attribute name="content" value="/WEB-INF/views/post/postDetail.jsp" />
     </definition>
+
+    <definition name="postWrite" extends="basicLayout">
+        <put-attribute name="content" value="/SE2/index.jsp" />
+    </definition>
+
+    <definition name="postUpdate" extends="basicLayout">
+        <put-attribute name="content" value="/SE2/updateIndex.jsp" />
+    </definition>
+
 
 </tiles-definitions>
