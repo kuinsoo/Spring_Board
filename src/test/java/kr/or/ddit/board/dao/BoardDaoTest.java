@@ -32,7 +32,7 @@ public class BoardDaoTest extends RootContext {
 		/*** When ***/
 		List<BoardVo> listBoard = boardDao.selectAllBoard();
 		/*** Then ***/
-		assertEquals(4,listBoard.size());
+		assertEquals(3,listBoard.size());
 	}
 
 	@Test
@@ -40,7 +40,7 @@ public class BoardDaoTest extends RootContext {
 		/*** Given ***/
 
 		/*** When ***/
-		BoardVo boardVo = boardDao.selectBoard("1");
+		BoardVo boardVo = boardDao.selectBoard("85");
 		/*** Then ***/
 		assertEquals("Y",boardVo.getBd_use());
 	}
@@ -64,7 +64,7 @@ public class BoardDaoTest extends RootContext {
 	public void editBoard() {
 		/*** Given ***/
 		BoardVo boardVo = new BoardVo();
-		boardVo.setBd_no("1");
+		boardVo.setBd_no("85");
 		boardVo.setBd_name("테스트 게시판입니다.");
 		boardVo.setBd_use("Y");
 		boardVo.setBd_creator("1");

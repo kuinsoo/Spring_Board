@@ -20,7 +20,7 @@
     <!-- 첨부파일 등록 -->
     <insert id="insertAttachment" parameterType="attVo">
         insert into ATTACHMENT (NO, POSTNO, ATT)
-        values (SEQATT.nextval, SEQPOST.currval, #{att_att})
+        values (SEQATT.nextval, #{att_postno}, #{att_att})
     </insert>
 
     <!-- 첨부파일 수정 -->

@@ -46,19 +46,28 @@ public class BoardServiceTest extends RootContext {
 	@Test
 	public void createBoard() {
 		/*** Given ***/
+		BoardVo boardVo = new BoardVo();
+		boardVo.setBd_name("멍청한 게시판");
+		boardVo.setBd_use("Y");
+		boardVo.setBd_creator("brown");
 
 		/*** When ***/
-
+		int resultCnt = boardService.createBoard(boardVo);
 		/*** Then ***/
+		assertEquals(1,resultCnt);
 	}
 
 	@Test
 	public void editBoard() {
 		/*** Given ***/
-
+		BoardVo boardVo = new BoardVo();
+		boardVo.setBd_no("85");
+		boardVo.setBd_name("멍청한 게시판!");
+		boardVo.setBd_use("Y");
 		/*** When ***/
-
+		int resultCnt = boardService.editBoard(boardVo);
 		/*** Then ***/
+		assertEquals(1,resultCnt);
 	}
 
 	@Test
@@ -66,7 +75,8 @@ public class BoardServiceTest extends RootContext {
 		/*** Given ***/
 
 		/*** When ***/
-
+		int resultCnt = boardService.deleteBoard("85");
 		/*** Then ***/
+		assertEquals(0,resultCnt);
 	}
 }
