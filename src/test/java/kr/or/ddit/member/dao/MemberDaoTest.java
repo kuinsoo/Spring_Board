@@ -49,6 +49,7 @@ public class MemberDaoTest extends RootContext {
 
 		/*** Then ***/
 		assertEquals(KISA_SHA256.encrypt("1"), memberVo.getMem_pass());
-
 	}
+
+
 }

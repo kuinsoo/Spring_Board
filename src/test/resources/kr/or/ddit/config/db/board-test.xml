@@ -26,7 +26,7 @@
     <!-- 게시판 생성 -->
     <insert id="createBoard" parameterType="boardVo">
         insert into BOARD values
-        (#{bd_no}, #{bd_name}, #{bd_use}, #{bd_creator}, #{bd_rdate})
+        (seqBoard.nextval, #{bd_name}, #{bd_use}, #{bd_creator}, to_char(sysdate,'yyyy-MM-dd'))
     </insert>
 
     <!-- 게시판 수정 -->

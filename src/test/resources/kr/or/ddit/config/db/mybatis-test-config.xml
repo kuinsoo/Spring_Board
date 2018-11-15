@@ -8,10 +8,16 @@
     <typeAliases>
         <typeAlias type="kr.or.ddit.member.model.MemberVo" alias="memberVo"/>
         <typeAlias type="kr.or.ddit.board.model.BoardVo" alias="boardVo"/>
+        <typeAlias type="kr.or.ddit.post.model.PostVo" alias="postVo"/>
+        <typeAlias type="kr.or.ddit.attachment.model.AttachmentVo" alias="attVo"/>
+        <typeAlias type="kr.or.ddit.comments.model.CommentsVo" alias="cmtVo"/>
     </typeAliases>
 
     <mappers>
         <mapper resource="kr/or/ddit/config/db/member-test.xml"/>
         <mapper resource="kr/or/ddit/config/db/board-test.xml"/>
+        <mapper resource="kr/or/ddit/config/db/post-test.xml"/>
+        <mapper resource="kr/or/ddit/config/db/attachment-test.xml"/>
+        <mapper resource="kr/or/ddit/config/db/comments-test.xml"/>
     </mappers>
 </configuration>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="post">
+    <resultMap id="mapPostVo" type="postVo">
+        <result property="post_no" column="no"/>
+        <result property="post_title" column="title"/>
+        <result property="post_content" column="content"/>
+        <result property="post_rdate" column="rdate"/>
+        <result property="post_writer" column="writer"/>
+        <result property="post_boardno" column="boardno"/>
+        <result property="post_recursion" column="recursion"/>
+        <result property="post_groupno" column="groupno"/>
+        <result property="post_sub" column="subtitle" />
+        <result property="post_rnum" column="rnum" />
+    </resultMap>
+
+    <!-- 게시글 검색 -->
+    <select id="selectPost" resultMap="mapPostVo" parameterType="String">
+        select  * from POST where NO = #{post_no}
+    </select>
+
+    <!-- 게시판 안에 전체 게시글 검색 -->
+    <select id="selectBoardInPost" resultMap="mapPostVo" parameterType="Map">
+        select * from
+                      (select ROWNUM rnum,
+                              A.*
+                       from  (select   level, lpad('└>',(level-1)*3, '　' )|| TITLE subtitle, post.*
+                              from POST
+                              where BOARDNO = #{post_groupno}
+                              start with RECURSION is null
+                              connect by prior no = RECURSION
+                              order siblings by GROUPNO desc) A)
+        where rnum between #{page}*#{pageSize}- (#{pageSize}-1)
+                      and #{page}*#{pageSize}
+    </select>
+
+    <select id="searchBoardInPost" resultMap="mapPostVo" parameterType="Map">
+        select * from
+                      (select ROWNUM rnum,
+                              A.*
+                       from  (select   level, lpad('└>',(level-1)*3, '　' )|| TITLE subtitle, post.*
+                              from POST
+                              where BOARDNO = #{post_groupno}
+                              start with RECURSION is null
+                              connect by prior no = RECURSION
+                              order siblings by GROUPNO desc) A)
+        where rnum between #{page}*#{pageSize}- (#{pageSize}-1)
+                      and #{page}*#{pageSize}
+                      and TITLE like '%' || #{search} || '%'
+    </select>
+
+    <!-- 전체 게시글 검색 -->
+    <select id="selectAllPost" parameterType="String" resultMap="mapPostVo">
+        select  *  from POST where BOARDNO = #{post_groupno}
+    </select>
+
+    <!-- 게시글 생성-->
+    <insert id="createPost" parameterType="postVo">
+        insert into POST  (NO, GROUPNO, TITLE, CONTENT, RDATE, WRITER, BOARDNO, RECURSION)
+        values (SEQPOST.nextval, SEQGROUPPOST.nextval, #{post_title},  #{post_content}, to_char(sysdate,'yyyy-MM-dd'), #{post_writer}, #{post_boardno}, #{post_recursion})
+    </insert>
+
+    <!-- 게시글 답글 생성 -->
+    <insert id="createRePost" parameterType="postVo">
+        insert into POST  (NO, GROUPNO, TITLE, CONTENT, RDATE, WRITER, BOARDNO, RECURSION)
+        values (SEQPOST.nextval, #{post_groupno},  #{post_title},  #{post_content}, to_char(sysdate,'yyyy-MM-dd'), #{post_writer}, #{post_boardno}, #{post_recursion})
+    </insert>
+
+    <!-- 게시글 수정 -->
+    <update id="editPost" parameterType="postVo"  >
+        update POST
+        set TITLE=#{post_title}, CONTENT=#{post_content}
+        where NO = #{post_no}
+    </update>
+
+    <!-- 게시글 삭제 표시 -->
+    <update id="editDelPost" parameterType="postVo"  >
+        update POST
+        set TITLE='삭제된 게시글 입니다.', WRITER='', RDATE = ''
+        where NO = #{post_no}
+    </update>
+
+
+    <!-- 게시글 삭제 -->
+    <delete id="deletePost" parameterType="String">
+        delete from POST where NO = #{post_no}
+    </delete>
+
+</mapper>

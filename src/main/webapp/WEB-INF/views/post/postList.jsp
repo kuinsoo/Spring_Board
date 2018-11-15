@@ -10,6 +10,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
+	function createPost() {
+		location.href= "/postWrite?bd_no=${post_groupno}&recursion="
+	}
+
+	function searchPost() {
+		var search  =  $('#searchPageList').val();
+		location.href= "/postSearch?bd_no=${post_groupno}&search="+search+"&page=1&pageSize=10";
+	}
+</script>
+<script>
+
 
     $(document).ready(function () {
 
@@ -39,14 +50,7 @@
     $('#postList').html(html);
 
 
-	function createPost() {
-		location.href= "/postWrite?bd_no=${post_groupno}&recursion="
-	}
 
-	function searchPost() {
-		var search  =  $('#searchPageList').val();
-		location.href= "/postSearch?bd_no=${post_groupno}&search="+search+"&page=1&pageSize=10";
-	}
 </script>
 
 
@@ -83,17 +87,17 @@
 
     <%-- 페이징 처리--%>
     <tr class="table-primary tbodyTr">
-        <th scope="row" colspan="3">
+        <th scope="row" colspan="4">
             <div style="margin: 0px auto;">
-                <ul class="pagination">
+                <ul class="pagination"  >
                     <c:choose>
                         <c:when test="${page eq 1}">
-                            <li class="page-item disabled">
+                            <li class="page-item disabled kku-floatLeft">
                                 <a class="page-link" href="#">&laquo;</a>
                             </li>
                         </c:when>
                         <c:otherwise>
-                            <li class="page-item">
+                            <li class="page-item kku-floatLeft"  >
                                 <a class="page-link" href="/postList?bd_no=${post_groupno}&page=${page-1}&pageSize=10">&laquo;</a>
                             </li>
                         </c:otherwise>
@@ -105,13 +109,13 @@
                     <c:forEach begin="1" end="${postAllList.size()/10+1}" varStatus="i">
                         <c:choose>
                             <c:when test="${page eq i.index}">
-                                <li class="page-item active">
+                                <li class="page-item active kku-floatLeft">
                                     <a class="page-link" href="/postList?bd_no=${post_groupno}&page=${i.index}&pageSize=10">${i.index}</a>
                                 </li>
                             </c:when>
 
                             <c:when test="${page ne i.index}">
-                                <li class="page-item">
+                                <li class="page-item kku-floatLeft">
                                     <a class="page-link" href="/postList?bd_no=${post_groupno}&page=${i.index}&pageSize=10">${i.index}</a>
                                 </li>
                             </c:when>
@@ -121,12 +125,12 @@
                     <fmt:parseNumber var="maxPage" value="${postAllList.size()/10+1}" integerOnly="true" scope="page" />
                     <c:choose>
                         <c:when test="${page eq maxPage}">
-                            <li class="page-item disabled">
+                            <li class="page-item disabled kku-floatLeft">
                                 <a class="page-link" href="#">&raquo;</a>
                             </li>
                         </c:when>
                         <c:otherwise>
-                            <li class="page-item">
+                            <li class="page-item kku-floatLeft">
                                 <a class="page-link" href="/postList?bd_no=${post_groupno}&page=${page+1}&pageSize=10">&raquo;</a>
                             </li>
                         </c:otherwise>
@@ -136,7 +140,7 @@
         </th>
     </tr>
     <tr>
-        <th>
+        <th colspan="2">
             <input type="text" name="searchPageList" id="searchPageList"/>
         </th>
         <th>
