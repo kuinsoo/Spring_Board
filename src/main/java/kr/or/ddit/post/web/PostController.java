@@ -1,5 +1,7 @@
 package kr.or.ddit.post.web;
 
+import kr.or.ddit.attachment.model.AttachmentVo;
+import kr.or.ddit.attachment.service.AttServiceInf;
 import kr.or.ddit.board.service.BoardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.member.model.MemberVo;
@@ -8,12 +10,15 @@ import kr.or.ddit.post.service.PostServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,6 +42,10 @@ public class PostController {
 	@Resource(name = "commentsService")
 	private CommentsServiceInf commentsService;
 
+	@Resource(name = "attService")
+	public AttServiceInf attService;
+
+
 	@RequestMapping("/postList")
 	public String postList(@RequestParam("bd_no")String bd_no,@RequestParam("page")String page,
 						   @RequestParam("pageSize")String pageSize, Model model, PostVo postVo) {
@@ -56,8 +65,10 @@ public class PostController {
 	@RequestMapping("/postDetail")
 	public String postDetail(@RequestParam("postNo")String postNo, @RequestParam("no")String no, Model model) {
 		PostVo postVo = postService.selectPost(postNo);
+		List<AttachmentVo> attachmentVos = attService.selectAttachment(postNo);
 		model.addAttribute("postVo", postVo);
 		model.addAttribute("no", no);
+		model.addAttribute("attList", attachmentVos);
 		model.addAttribute("cmtList",commentsService.selectCmtList(postNo));
 		model.addAttribute("listBoard", boardService.selectAllBoard());
 		return "postDetail";
@@ -71,13 +82,17 @@ public class PostController {
 		return "postWrite";
 	}
 
-	@RequestMapping("/postCreate")
-	public String postCreate(Model model,  @RequestParam("recursion")String recursion,
+	@RequestMapping(value = "/postCreate", method = RequestMethod.POST)
+	public String postCreate(@RequestPart("attach") MultipartFile part,
+							 HttpServletRequest request,
+							 Model model,
+							 @RequestParam("recursion")String recursion,
 							 @RequestParam("bd_no")String bd_no,
 							 @RequestParam("smarteditor")String smarteditor,
 							 @RequestParam("post_title")String post_title,
-							 @SessionAttribute("memberVo")MemberVo memberVo) {
+							 @SessionAttribute("memberVo")MemberVo memberVo) throws IOException {
 		PostVo postVo = new PostVo();
+		AttachmentVo attachmentVo =  new AttachmentVo();
 		postVo.setPost_content(smarteditor);
 		postVo.setPost_title(post_title);
 		postVo.setPost_writer(memberVo.getMem_id());
@@ -90,7 +105,16 @@ public class PostController {
 			postVo.setPost_recursion(recursion);
 			postService.createPost(postVo);
 		}
-
+		if(part.getSize() > 0) {
+			String path = request.getServletContext().getRealPath("/profile");
+			String fileName = part.getOriginalFilename();
+			String path2 =  "D:\\T_Development\\e_project\\workspace_intelliJ\\upload\\";
+			attachmentVo.setAtt_att(path2 + fileName);
+			attService.insertAttachment(attachmentVo);
+			part.transferTo(new File(path2 + fileName));
+		} else {
+//			userVo.setProfile("");
+		}
 		return "redirect:postList?bd_no="+bd_no+"&page="+1+"&pageSize="+10;
 	}
 
@@ -104,12 +128,15 @@ public class PostController {
 		return "postUpdate";
 	}
 
-	@RequestMapping("/postEdit")
+	@RequestMapping(value = "/postEdit", method = RequestMethod.POST)
 	public String postCreate( Model model,
-			@RequestParam("no")String bd_no,
+							  @RequestPart("attach") MultipartFile part,
+							  HttpServletRequest request,
+							  @RequestParam("no")String bd_no,
 							  @RequestParam("postNo")String postNo,
 							 @RequestParam("smarteditor")String smarteditor,
-							 @RequestParam("post_title")String post_title) {
+							 @RequestParam("post_title")String post_title) throws IOException {
+
 		PostVo postVo = postService.selectPost(postNo);
 		postVo.setPost_content(smarteditor);
 		postVo.setPost_title(post_title);
@@ -118,7 +145,24 @@ public class PostController {
 		model.addAttribute("postVo", postVo);
 		model.addAttribute("no", bd_no);
 		model.addAttribute("listBoard", boardService.selectAllBoard());
-
+		List<AttachmentVo> attachmentVos = attService.selectAttachment(postNo);
+		if(part.getSize() > 0) {
+			String path = request.getServletContext().getRealPath("/profile");
+			String fileName = part.getOriginalFilename();
+			String path2 =  "D:\\T_Development\\e_project\\workspace_intelliJ\\upload\\";
+			attachmentVos.get(0).setAtt_att(path2 + fileName);
+			attService.updateAttachment(attachmentVos.get(0));
+			part.transferTo(new File(path2 + fileName));
+		} else {
+//			userVo.setProfile("");
+		}
+		PostVo post = postService.selectPost(postNo);
+		List<AttachmentVo> attachmentList = attService.selectAttachment(postNo);
+		model.addAttribute("postVo", post);
+		model.addAttribute("no", bd_no);
+		model.addAttribute("attList", attachmentList);
+		model.addAttribute("cmtList",commentsService.selectCmtList(postNo));
+		model.addAttribute("listBoard", boardService.selectAllBoard());
 
 		return "postDetail";
 	}
@@ -131,5 +175,39 @@ public class PostController {
 		return "redirect:postList?bd_no="+bd_no+"&page="+1+"&pageSize="+10;
 	}
 
+	@RequestMapping("/postSearch")
+	public String postSearch(@RequestParam("bd_no")String bd_no,@RequestParam("page")String page,
+						   @RequestParam("pageSize")String pageSize, Model model,
+							 @RequestParam("search")String search) {
+		Map<String, String> map = new HashMap<>();
+		map.put("page",page);
+		map.put("pageSize",pageSize);
+		map.put("post_groupno",bd_no);
+		map.put("search",search);
+		model.addAttribute("postAllList",postService.selectAllPost(bd_no));
+		model.addAttribute("postList",postService.searchBoardInPost(map));
+		model.addAttribute("post_groupno",bd_no);
+		model.addAttribute("page",page);
+		model.addAttribute("pageSize",pageSize);
+		model.addAttribute("listBoard", boardService.selectAllBoard());
+		return "postList";
+	}
+
+
+	@RequestMapping("/postListAjax")
+	public String postListAjax(@RequestParam("bd_no")String bd_no,@RequestParam("page")String page,
+						   @RequestParam("pageSize")String pageSize, Model model) {
+		Map<String, String> map = new HashMap<>();
+		map.put("page",page);
+		map.put("pageSize",pageSize);
+		map.put("post_groupno",bd_no);
+		model.addAttribute("postAllList",postService.selectAllPost(bd_no));
+		model.addAttribute("postList",postService.selectBoardInPost(map));
+		model.addAttribute("post_groupno",bd_no);
+		model.addAttribute("page",page);
+		model.addAttribute("pageSize",pageSize);
+		model.addAttribute("listBoard", boardService.selectAllBoard());
+		return "jsonView";
+	}
 
 }

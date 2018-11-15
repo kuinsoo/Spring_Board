@@ -51,12 +51,34 @@ public class CommentsController {
 	}
 
 	@RequestMapping("/updateCmt")
-	public String updateCmt() {
-		return "updateCmt";
+	public String updateCmt(Model model, @RequestParam("postno")String postno, @RequestParam("content")String content,
+							@RequestParam("cmtNo") String cmtNo, @RequestParam("bd_no")String no, CommentsVo cmtVo) {
+
+		CommentsVo commentsVo = commentsService.selectCmt(cmtNo);
+		commentsVo.setCmt_content(content);
+		commentsService.updateCmt(commentsVo);
+		PostVo postVo = postService.selectPost(postno);
+		model.addAttribute("postVo", postVo);
+		model.addAttribute("no", no);
+		model.addAttribute("listBoard", boardService.selectAllBoard());
+		model.addAttribute("cmtList",commentsService.selectCmtList(postno));
+		return "postDetail";
 	}
 
 	@RequestMapping("/deleteCmt")
-	public String deleteCmt() {
-		return "deleteCmt";
+	public String deleteCmt(Model model, @RequestParam("postno")String postno,
+							@RequestParam("cmtNo") String cmtNo, @RequestParam("bd_no")String no) {
+
+		CommentsVo commentsVo = commentsService.selectCmt(cmtNo);
+		commentsVo.setCmt_content("삭제 된 댓글 입니다.");
+		commentsVo.setCmt_writer("");
+		commentsService.updateCmt(commentsVo);
+		PostVo postVo = postService.selectPost(postno);
+		model.addAttribute("postVo", postVo);
+		model.addAttribute("no", no);
+		model.addAttribute("listBoard", boardService.selectAllBoard());
+		model.addAttribute("cmtList",commentsService.selectCmtList(postno));
+		return "postDetail";
 	}
+
 }

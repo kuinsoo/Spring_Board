@@ -89,7 +89,7 @@
 
 </style>
 
-<form action="/postEdit?no=${no}&postNo=${postVo.post_no}" method="post" id="frm">
+<form action="/postEdit?no=${no}&postNo=${postVo.post_no}" method="post" id="frm" enctype="multipart/form-data" class="kku-floatLeft" >
 	<div class="form-group">
 		<label class="col-form-label" for="inputDefault">제목</label>
 		<input type="text" class="form-control" name="post_title" placeholder="제목" id="inputDefault" value="${postVo.post_title}">
@@ -99,7 +99,7 @@
 	<div style="width:766px;" >
 		<label>File input</label>
 		<div id="fileForm" class="form-group" style="width:600px; float: left;">
-			<input type="file"  name="attach" class="form-control-file" id="" aria-describedby="fileHelp" multiple />
+			<input type="file"  name="attach"  multiple="multiple" class="form-control-file" id="" aria-describedby="fileHelp"  />
 		</div>
 		<div>
 			<button type="button" id="attachAdd"> 파일첨부추가</button>

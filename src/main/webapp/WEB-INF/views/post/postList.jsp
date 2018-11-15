@@ -8,11 +8,49 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
+
+    $(document).ready(function () {
+
+    });
+
+    $.ajax({
+        type            : "GET",
+        url             : "/postListAjax",
+        data            : "bd_no=${board.bd_no}&page=1&pageSize=10",
+        success         : function (data) {
+            var html = "";
+            $.each(data.postList),function (idx, post) {
+                html += "<tr class='table-primary tbodyTr'>";
+	            html += "<th scope='row'>${postVo.post_rnum}</th>";
+	            if( ${postVo.post_writer} == null ){
+		            html += "<td>${postVo.post_sub}</td>";
+	            } else {
+		            html += "<td> <a href='/postDetail?postNo=${postVo.post_no}&no=${post_groupno}'  style='cursor: pointer; text-decoration:none;' >${postVo.post_sub}</a></td>";
+	            }
+	            html += "<td>${postVo.getPost_writer()}</td>";
+	            html += "<td><fmt:formatDate value='${postVo.getPost_rdate()}' /></td>";
+	            html += "</tr>";
+            }
+        }
+    });
+    $('#postList').html("");
+    $('#postList').html(html);
+
+
 	function createPost() {
 		location.href= "/postWrite?bd_no=${post_groupno}&recursion="
 	}
+
+	function searchPost() {
+		var search  =  $('#searchPageList').val();
+		location.href= "/postSearch?bd_no=${post_groupno}&search="+search+"&page=1&pageSize=10";
+	}
 </script>
+
+
+
 <table class="table table-hover">
     <thead>
     <tr>
@@ -24,7 +62,7 @@
     </thead>
 
 
-    <tbody>
+    <tbody id="postList">
     <c:forEach items="${postList}" var="postVo">
         <tr class="table-primary tbodyTr">
             <th scope="row">${postVo.post_rnum}</th>
@@ -95,6 +133,14 @@
                     </c:choose>
                 </ul>
             </div>
+        </th>
+    </tr>
+    <tr>
+        <th>
+            <input type="text" name="searchPageList" id="searchPageList"/>
+        </th>
+        <th>
+            <button type="button" class="btn btn-outline-success" onclick="searchPost()">검색</button>
         </th>
         <th>
             <button type="button" class="btn btn-outline-success" onclick="createPost()">글쓰기</button>

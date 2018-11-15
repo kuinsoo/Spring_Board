@@ -54,6 +54,12 @@ public class PostDao implements PostDaoInf{
 		return  postList;
 	}
 
+
+	@Override
+	public List<PostVo> searchBoardInPost(Map<String, String> postMap) {
+		return template.selectList("post.searchBoardInPost",postMap);
+	}
+
 	/**
 	 * 게시글 생성
 	 * @param postVo

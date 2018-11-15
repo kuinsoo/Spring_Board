@@ -88,7 +88,7 @@
 
 </style>
 
-<form action="/postCreate?bd_no=${bd_no}" method="POST" id="frm"  class="kku-floatLeft">
+<form action="/postCreate?bd_no=${bd_no}" method="POST" id="frm"  class="kku-floatLeft" enctype="multipart/form-data">
 	<div class="form-group">
 		<label class="col-form-label" for="inputDefault">제목</label>
 		<input type="text" class="form-control" name="post_title" placeholder="제목" id="inputDefault">
@@ -98,7 +98,7 @@
 	<div style="width:766px;" >
 		<label>File input</label>
 		<div id="fileForm" class="form-group" style="width:600px; float: left;">
-			<input type="file"  name="attach" class="form-control-file" id="" aria-describedby="fileHelp" />
+			<input type="file"  name="attach" multiple="multiple" class="form-control-file" id="" aria-describedby="fileHelp" />
 		</div>
 		<div>
 			<button type="button" id="attachAdd"> 파일첨부추가</button>

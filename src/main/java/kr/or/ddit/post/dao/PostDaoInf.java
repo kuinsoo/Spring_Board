@@ -34,6 +34,8 @@ public interface PostDaoInf {
 	 */
 	List<PostVo> selectBoardInPost(Map<String, String> postMap);
 
+	List<PostVo> searchBoardInPost(Map<String, String> postMap);
+
 	/**
 	 * 게시글 생성
 	 * @param postVo

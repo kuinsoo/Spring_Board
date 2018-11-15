@@ -59,10 +59,11 @@
 				case 2:
 					var content = document.getElementById("updateCmtText"+num).value;
 					console.log(content);
-					location.href = "/updateCmt?postno=${postVo.getPost_no()}&content=" + content + "&cmtNo="+cmtNo;
+					location.href = "/updateCmt?postno=${postVo.getPost_no()}&content=" + content + "&cmtNo="+cmtNo+"&bd_no=${no}";
 					break;
 				case 3:
-					location.href = "/deleteCmt?postno=${postVo.getPost_no()}&cmtNo="+cmtNo;
+					location.href = "/deleteCmt?postno=${postVo.getPost_no()}&content=" + content + "&cmtNo="+cmtNo+"&bd_no=${no}";
+					/*location.href = "/deleteCmt?postno=${postVo.getPost_no()}&cmtNo="+cmtNo;*/
 					break;
 			}
 		}
@@ -84,7 +85,7 @@
         height: 31px
     }
 </style>
-<form action="/postCreate" method="post" id="frm" enctype="multipart/form-data">
+<form action="/postCreate" method="post" id="frm"  enctype="multipart/form-data">
 <div class="kku-floatLeft">
     <div class="form-group divForm">
         <fieldset>
@@ -101,12 +102,10 @@
     <%-- 버튼 영역 --%>
     <div  class="divForm">
         <div style="width:766px;" >
-            <label>File input</label>
-            <div id="fileForm" class="form-group" style="width:450px; float: left;">
-                <input type="file"  name="attach" class="form-control-file" id="" aria-describedby="fileHelp" multiple />
-            </div>
-            <div>
-                <button type="button" id="attachAdd"> 파일첨부추가</button>
+            <div id="fileForm" class="form-group" style="width:700px; float: left;">
+                <c:forEach items="${attList}" var="attVo" >
+                   <a href="${attVo.att_att}" download>${attVo.att_att}</a>
+                </c:forEach>
             </div>
         </div>
         <div style="text-align: right; padding-bottom: 35px">
@@ -126,6 +125,9 @@
     <c:forEach items="${cmtList}" var="cmtVo" varStatus="i">
         <div class="divForm" style="padding-top: 10px; border-top: solid 1px wheat">
             <c:choose >
+                <c:when test="${cmtVo.cmt_writer == ''}">
+                    <input type="text" class="replyForm" value="${cmtVo.cmt_content}" readonly="readonly" style="background: #d6c9a7;" />
+                </c:when>
                 <c:when test="${cmtVo.cmt_writer eq memberVo.mem_id}" >
                     <input type="text" class="replyForm" value="${cmtVo.cmt_content}" id="updateCmtText${i.index}" />
                     <button type="button" class="btn replyBtn btn-outline-warning" onclick="cmtController(2, ${cmtVo.cmt_no}, ${i.index})" >수정</button>

@@ -56,6 +56,11 @@ public class PostService implements PostServiceInf {
 	}
 
 	@Override
+	public List<PostVo> searchBoardInPost(Map<String, String> postMap) {
+		return dao.searchBoardInPost(postMap);
+	}
+
+	@Override
 	public int createRePost(PostVo postVo) {
 		return dao.createRePost(postVo);
 	}

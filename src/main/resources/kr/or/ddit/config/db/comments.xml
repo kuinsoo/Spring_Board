@@ -33,7 +33,7 @@
     <!-- 댓글 수정 -->
     <update id="updateCmt" parameterType="cmtVo">
         update COMMENTS
-        set CONTENT = #{cmt_content}
+        set CONTENT = #{cmt_content}, WRITER=#{cmt_writer}
         where NO = #{cmt_no}
     </update>
 

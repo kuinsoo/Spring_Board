@@ -34,6 +34,8 @@ public interface PostServiceInf {
 	 */
 	List<PostVo> selectBoardInPost(Map<String, String> postMap);
 
+	List<PostVo> searchBoardInPost(Map<String, String> postMap);
+
 	/**
 	 * 게시글 생성
 	 * @param postVo
@@ -63,4 +65,6 @@ public interface PostServiceInf {
 	 * @return
 	 */
 	int createRePost(PostVo postVo);
+
+
 }
