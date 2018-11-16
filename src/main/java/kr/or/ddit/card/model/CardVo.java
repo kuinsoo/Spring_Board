@@ -11,12 +11,12 @@ package kr.or.ddit.card.model;
  */
 public class CardVo {
 
-	private String card_group;
-		private float card_index;
-	private int  card_no;
-	private String card_title;
-	private String card_content;
-	private int progress;
+	private String 	card_group;
+	private float 	card_index;
+	private int  	card_no;
+	private String 	card_title;
+	private String 	card_content;
+	private int 	progress;
 
 	public CardVo() {
 	}
