@@ -175,7 +175,7 @@ public class PostController {
 		return "redirect:postList?bd_no="+bd_no+"&page="+1+"&pageSize="+10;
 	}
 
-	@RequestMapping("/postSearch")
+	@RequestMapping("/postSearchAjax")
 	public String postSearch(@RequestParam("bd_no")String bd_no,@RequestParam("page")String page,
 						   @RequestParam("pageSize")String pageSize, Model model,
 							 @RequestParam("search")String search) {
@@ -189,12 +189,32 @@ public class PostController {
 		model.addAttribute("post_groupno",bd_no);
 		model.addAttribute("page",page);
 		model.addAttribute("pageSize",pageSize);
+		model.addAttribute("search",search);
 		model.addAttribute("listBoard", boardService.selectAllBoard());
-		return "postList";
+		return "json/ajaxSearch";
+	}
+
+	@RequestMapping(value = "/ajaxSearchPagination" ,method = RequestMethod.GET)
+	public String ajaxSearchPagination(@RequestParam("bd_no")String bd_no,@RequestParam("page")String page,
+									   @RequestParam("pageSize")String pageSize, Model model,
+									   @RequestParam("search")String search) {
+		Map<String, String> map = new HashMap<>();
+		map.put("page",page);
+		map.put("pageSize",pageSize);
+		map.put("post_groupno",bd_no);
+		map.put("search",search);
+		model.addAttribute("postAllList",postService.searchBoardInPost(map));
+		model.addAttribute("postList",postService.searchBoardInPost(map));
+		model.addAttribute("post_groupno",bd_no);
+		model.addAttribute("page",page);
+		model.addAttribute("pageSize",pageSize);
+		model.addAttribute("search",search);
+		model.addAttribute("listBoard", boardService.selectAllBoard());
+		return "json/ajaxSearchPagination";
 	}
 
 
-	@RequestMapping("/postListAjax")
+	@RequestMapping(value = "/postListAjax" ,method = RequestMethod.GET)
 	public String postListAjax(@RequestParam("bd_no")String bd_no,@RequestParam("page")String page,
 						   @RequestParam("pageSize")String pageSize, Model model) {
 		Map<String, String> map = new HashMap<>();
@@ -207,7 +227,34 @@ public class PostController {
 		model.addAttribute("page",page);
 		model.addAttribute("pageSize",pageSize);
 		model.addAttribute("listBoard", boardService.selectAllBoard());
-		return "jsonView";
+		return "json/ajaxPageList";
 	}
+
+	@RequestMapping(value = "/paginationAjax" ,method = RequestMethod.GET)
+	public String paginationAjax(@RequestParam("bd_no")String bd_no,@RequestParam("page")String page,
+							   @RequestParam("pageSize")String pageSize, Model model) {
+		Map<String, String> map = new HashMap<>();
+		map.put("page",page);
+		map.put("pageSize",pageSize);
+		map.put("post_groupno",bd_no);
+		model.addAttribute("postAllList",postService.selectAllPost(bd_no));
+		model.addAttribute("postList",postService.selectBoardInPost(map));
+		model.addAttribute("post_groupno",bd_no);
+		model.addAttribute("page",page);
+		model.addAttribute("pageSize",pageSize);
+		model.addAttribute("listBoard", boardService.selectAllBoard());
+		return "json/ajaxPagination";
+	}
+
+
+
+
+
+
+
+
+
+
+
 
 }
