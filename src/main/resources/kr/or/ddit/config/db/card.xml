@@ -11,24 +11,24 @@
 
    <!-- <select id="selectGroupCard" resultType="cardVo" parameterType="String">
         select * from CARD where CARd_GROUP = #{CARd_GROUP}
+    </select>-->
+
+    <select id="selectCard" resultType="cardVo" parameterType="int">
+        select * from card where CARD_NO = #{card_no}
     </select>
 
-    <select id="selectCard" resultType="cardVo" parameterType="String">
-        select * from card where CARd_INDEX = #{CARd_INDEX}
-    </select>
-
-    <insert id="createCard" parameterType="cardVo">
+    <!--<insert id="createCard" parameterType="cardVo">
         insert into card values (CARD_TITLE= #{card_title}, CARD_CONTENT=#{card_content},
          CARD_GROUP=#{card_group})
-    </insert>
+    </insert>-->
 
     <update id="updateCard" parameterType="cardVo">
         update card
-        set CARD_TITLE= #{card_title}, CARD_CONTENT=#{card_content}, CARD_GROUP=#{card_group}
-        where CARD_INDEX = #{card_index}
+        set CARD_TITLE= #{card_title}, CARD_CONTENT=#{card_content}, CARD_GROUP=#{card_group}, CARD_INDEX=#{card_index}
+        where CARD_NO = #{card_no}
     </update>
 
-    <delete id="deleteCard" parameterType="Float">
+    <!--<delete id="deleteCard" parameterType="Float">
         delete from card where CARD_INDEX = #{card_index}
     </delete>-->
 </mapper>

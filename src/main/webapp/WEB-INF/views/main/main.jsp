@@ -11,6 +11,7 @@
 
 <link rel="stylesheet" href="/css/ui.css">
 <link rel="stylesheet" href="/css/commons.css">
+
 <style>
     body {
         min-width: 520px;
@@ -53,11 +54,12 @@
         height: 50px;
     }
 </style>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-
-
+    $(document).ready(function () {
+        $('.kku-hide').hide();
+    });
 	$( function() {
 		var tabs = $("#planList").tabs();
 		tabs.find(".column" ).sortable({
@@ -66,11 +68,15 @@
 			cancel: ".portlet-toggle",
 			placeholder: "portlet-placeholder ui-corner-all",
 			stop      : function(event, ui){
+				var index = parseInt(ui.item.prev().children(".kku-index").text()) - parseInt(ui.item.next().children(".kku-index").text());
+                var no = parseInt(ui.item.children(".kku-no").text());
+                var group =  ui.item.children(".kku-group").text();
 				//alert(ui.item.prev().index());
 				//alert(ui.item.prev().text()) //전값
 				//alert(ui.item.text()) //현재값
 				//alert(ui.item.next().text()) //다음값
 				tabs.tabs("refresh");
+				updateCard(no, group, index);
 			}
 		});
 
@@ -86,6 +92,10 @@
 			icon.closest( ".portlet" ).find( ".portlet-content" ).toggle();
 		});
 	} );
+
+	function updateCard(no, group, index){
+		location.href = "/updateCard?card_no="+no+"card_group"+group+"card_index"+index;
+    };
 </script>
 <div class="kku-floatLeft kku-boarder kku-mainPage" id="planList">
 
@@ -98,6 +108,9 @@
                     <div class="portlet-content">
                             ${cardVo.card_content}
                     </div>
+                    <label class="kku-hide kku-no" >${cardVo.card_no}</label>
+                    <label class="kku-hide kku-group" >${cardVo.card_group}</label>
+                    <label class="kku-hide kku-index" >${cardVo.card_index}</label>
                 </div>
             </c:if>
         </c:forEach>
@@ -112,6 +125,9 @@
                     <div class="portlet-content">
                             ${cardVo.card_content}
                     </div>
+                    <label class="kku-hide kku-no" >${cardVo.card_no}</label>
+                    <label class="kku-hide kku-group" >${cardVo.card_group}</label>
+                    <label class="kku-hide kku-index" >${cardVo.card_index}</label>
                 </div>
             </c:if>
         </c:forEach>
@@ -126,6 +142,9 @@
                     <div class="portlet-content">
                             ${cardVo.card_content}
                     </div>
+                    <label class="kku-hide kku-no" >${cardVo.card_no}</label>
+                    <label class="kku-hide kku-group" >${cardVo.card_group}</label>
+                    <label class="kku-hide kku-index" >${cardVo.card_index}</label>
                 </div>
             </c:if>
         </c:forEach>
@@ -140,6 +159,9 @@
                     <div class="portlet-content">
                             ${cardVo.card_content}
                     </div>
+                    <label class="kku-hide kku-no" >${cardVo.card_no}</label>
+                    <label class="kku-hide kku-group" >${cardVo.card_group}</label>
+                    <label class="kku-hide kku-index" >${cardVo.card_index}</label>
                 </div>
             </c:if>
         </c:forEach>
@@ -154,6 +176,9 @@
                     <div class="portlet-content">
                             ${cardVo.card_content}
                     </div>
+                    <label class="kku-hide kku-no" >${cardVo.card_no}</label>
+                    <label class="kku-hide kku-group" >${cardVo.card_group}</label>
+                    <label class="kku-hide kku-index" >${cardVo.card_index}</label>
                 </div>
             </c:if>
         </c:forEach>

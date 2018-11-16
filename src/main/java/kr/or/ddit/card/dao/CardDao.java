@@ -33,8 +33,8 @@ public class CardDao implements CardDaoInf {
 	}
 
 	@Override
-	public CardVo selectCard(float index) {
-		return template.selectOne("card.selectCard",index);
+	public CardVo selectCard(int cardNo) {
+		return template.selectOne("card.selectCard",cardNo);
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class CardDao implements CardDaoInf {
 	}
 
 	@Override
-	public int deleteCard(float index) {
-		return template.delete("card.deleteCard",index);
+	public int deleteCard(int cardNo) {
+		return template.delete("card.deleteCard",cardNo);
 	}
 }

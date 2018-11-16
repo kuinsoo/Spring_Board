@@ -33,8 +33,8 @@ public class CardService implements CardServiceInf {
 	}
 
 	@Override
-	public CardVo selectCard(float index) {
-		return cardDao.selectCard(index);
+	public CardVo selectCard(int cardNo) {
+		return cardDao.selectCard(cardNo);
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class CardService implements CardServiceInf {
 	}
 
 	@Override
-	public int deleteCard(float index) {
-		return cardDao.deleteCard(index);
+	public int deleteCard(int cardNo) {
+		return cardDao.deleteCard(cardNo);
 	}
 }

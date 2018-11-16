@@ -19,12 +19,12 @@ public interface CardDaoInf {
 
 	List<CardVo> selectGroupCard(String groupNo);
 
-	CardVo selectCard(float index);
+	CardVo selectCard(int cardNo);
 
 	int createCard(CardVo cardVo);
 
 	int updateCard(CardVo cardVo);
 
-	int deleteCard(float index);
+	int deleteCard(int cardNo);
 
 }
