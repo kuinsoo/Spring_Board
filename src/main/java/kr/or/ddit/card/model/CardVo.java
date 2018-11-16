@@ -11,60 +11,60 @@ package kr.or.ddit.card.model;
  */
 public class CardVo {
 
-	private String cart_title;
-	private String cart_content;
-	private String cart_index;
-	private String cart_group;
+	private String card_title;
+	private String card_content;
+	private float card_index;
+	private String card_group;
 
 	public CardVo() {
 	}
 
-	public CardVo(String cart_title, String cart_content, String cart_index, String cart_group) {
-		this.cart_title = cart_title;
-		this.cart_content = cart_content;
-		this.cart_index = cart_index;
-		this.cart_group = cart_group;
+	public CardVo(String card_title, String card_content, float card_index, String card_group) {
+		this.card_title = card_title;
+		this.card_content = card_content;
+		this.card_index = card_index;
+		this.card_group = card_group;
 	}
 
-	public String getCart_title() {
-		return cart_title;
+	public String getCard_title() {
+		return card_title;
 	}
 
-	public void setCart_title(String cart_title) {
-		this.cart_title = cart_title;
+	public void setCard_title(String card_title) {
+		this.card_title = card_title;
 	}
 
-	public String getCart_content() {
-		return cart_content;
+	public String getCard_content() {
+		return card_content;
 	}
 
-	public void setCart_content(String cart_content) {
-		this.cart_content = cart_content;
+	public void setCard_content(String card_content) {
+		this.card_content = card_content;
 	}
 
-	public String getCart_index() {
-		return cart_index;
+	public float getCard_index() {
+		return card_index;
 	}
 
-	public void setCart_index(String cart_index) {
-		this.cart_index = cart_index;
+	public void setCard_index(float card_index) {
+		this.card_index = card_index;
 	}
 
-	public String getCart_group() {
-		return cart_group;
+	public String getCard_group() {
+		return card_group;
 	}
 
-	public void setCart_group(String cart_group) {
-		this.cart_group = cart_group;
+	public void setCard_group(String card_group) {
+		this.card_group = card_group;
 	}
 
 	@Override
 	public String toString() {
 		return "CardVo{" +
-				"cart_title='" + cart_title + '\'' +
-				", cart_content='" + cart_content + '\'' +
-				", cart_index='" + cart_index + '\'' +
-				", cart_group='" + cart_group + '\'' +
+				"card_title='" + card_title + '\'' +
+				", card_content='" + card_content + '\'' +
+				", card_index=" + card_index +
+				", card_group='" + card_group + '\'' +
 				'}';
 	}
 }
