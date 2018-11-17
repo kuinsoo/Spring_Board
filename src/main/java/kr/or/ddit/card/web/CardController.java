@@ -33,10 +33,13 @@ public class CardController {
 							 @RequestParam("card_index")float card_index) {
 		CardVo cardVo = cardService.selectCard(card_no);
 
+		System.out.println(card_index);
+
 		cardVo.setCard_group(card_group);
 		cardVo.setCard_index(card_index);
 
 		cardService.updateCard(cardVo);
+		model.addAttribute("cardList",cardService.selectAllCard());
 
 		return "main";
 	}

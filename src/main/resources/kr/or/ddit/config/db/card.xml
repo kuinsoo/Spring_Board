@@ -6,7 +6,7 @@
 <mapper namespace="card">
 
     <select id="selectAllCard" resultType="cardVo">
-        select * from CARD
+        select * from CARD order by CARD_INDEX desc
     </select>
 
    <!-- <select id="selectGroupCard" resultType="cardVo" parameterType="String">

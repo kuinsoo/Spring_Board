@@ -9,10 +9,11 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link rel="stylesheet" href="/css/ui.css">
-<link rel="stylesheet" href="/css/commons.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 
 <style>
+
     body {
         min-width: 520px;
         font-size: 13px;
@@ -57,9 +58,9 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-    $(document).ready(function () {
-        $('.kku-hide').hide();
-    });
+	$(document).ready(function () {
+		$('.kku-hide').hide();
+	});
 	$( function() {
 		var tabs = $("#planList").tabs();
 		tabs.find(".column" ).sortable({
@@ -68,9 +69,18 @@
 			cancel: ".portlet-toggle",
 			placeholder: "portlet-placeholder ui-corner-all",
 			stop      : function(event, ui){
-				var index = parseInt(ui.item.prev().children(".kku-index").text()) - parseInt(ui.item.next().children(".kku-index").text());
-                var no = parseInt(ui.item.children(".kku-no").text());
-                var group =  ui.item.children(".kku-group").text();
+				var prev = isNaN(parseFloat(ui.item.prev().children(".kku-index").text()))  ?  9999999 : parseInt(ui.item.prev().children(".kku-index").text());
+				var next = isNaN(parseFloat(ui.item.next().children(".kku-index").text())) ? 0 : parseInt(ui.item.next().children(".kku-index").text());
+				var index = prev - ((prev - next) / 2);
+				var no = parseInt(ui.item.children(".kku-no").text());
+				var group = ui.item.prev().children(".kku-group").text();
+				if (group === "" ) {
+					group = ui.item.next().children(".kku-group").text();
+                }
+				// alert(next)
+                // alert(index)
+				// alert(index)
+
 				//alert(ui.item.prev().index());
 				//alert(ui.item.prev().text()) //전값
 				//alert(ui.item.text()) //현재값
@@ -94,13 +104,22 @@
 	} );
 
 	function updateCard(no, group, index){
-		location.href = "/updateCard?card_no="+no+"card_group"+group+"card_index"+index;
-    };
+		location.href = "/updateCard?card_no="+no+"&card_group="+group+"&card_index="+index;
+	};
 </script>
+<ul style="list-style: none">
+    <li style="width: 170px; float: left">아이디어</li>
+    <li style="width: 170px; float: left">검색중</li>
+    <li style="width: 170px; float: left">진행중</li>
+    <li style="width: 170px; float: left">완료</li>
+    <li style="width: 170px; float: left">적용중</li>
+</ul>
 <div class="kku-floatLeft kku-boarder kku-mainPage" id="planList">
 
     <div class="column">
-        <label >아이디어</label>
+        <div class="portlet" >
+            <label class="kku-hide kku-group">1</label>
+        </div>
         <c:forEach items="${cardList}" var="cardVo" >
             <c:if test="${cardVo.card_group eq '1'}">
                 <div class="portlet">
@@ -117,7 +136,9 @@
     </div>
 
     <div class="column">
-        <label >검색중</label>
+        <div class="portlet">
+            <label class="kku-hide kku-group">2</label>
+        </div>
         <c:forEach items="${cardList}" var="cardVo" >
             <c:if test="${cardVo.card_group eq '2'}">
                 <div class="portlet">
@@ -134,7 +155,9 @@
     </div>
 
     <div class="column">
-        <label >진행중</label>
+        <div class="portlet">
+            <label class="kku-hide kku-group">3</label>
+        </div>
         <c:forEach items="${cardList}" var="cardVo" >
             <c:if test="${cardVo.card_group eq '3'}">
                 <div class="portlet">
@@ -151,7 +174,9 @@
     </div>
 
     <div class="column">
-        <label >완료</label>
+        <div class="portlet">
+            <label class="kku-hide kku-group">4</label>
+        </div>
         <c:forEach items="${cardList}" var="cardVo" >
             <c:if test="${cardVo.card_group eq '4'}">
                 <div class="portlet">
@@ -168,7 +193,9 @@
     </div>
 
     <div class="column">
-        <label >적용</label>
+        <div class="portlet">
+            <label class="kku-hide kku-group">5</label>
+        </div>
         <c:forEach items="${cardList}" var="cardVo" >
             <c:if test="${cardVo.card_group eq '5'}">
                 <div class="portlet">

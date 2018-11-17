@@ -1,7 +1,5 @@
 package kr.or.ddit.comments.model;
 
-import lombok.Data;
-
 import java.util.Date;
 
 /**
