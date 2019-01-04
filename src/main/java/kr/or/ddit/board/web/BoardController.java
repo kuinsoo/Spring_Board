@@ -1,18 +1,18 @@
 package kr.or.ddit.board.web;
 
-import kr.or.ddit.board.model.BoardVo;
-import kr.or.ddit.board.service.BoardServiceInf;
-import kr.or.ddit.member.model.MemberVo;
+import java.io.UnsupportedEncodingException;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
+import kr.or.ddit.board.model.BoardVo;
+import kr.or.ddit.board.service.BoardServiceInf;
+import kr.or.ddit.member.model.MemberVo;
 
 /**
  * kr.or.ddit.user.board.web
