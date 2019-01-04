@@ -40,4 +40,5 @@
     <delete id="deleteBoard" parameterType="String">
         delete from BOARD where NAME = #{bd_name}
     </delete>
+
 </mapper>

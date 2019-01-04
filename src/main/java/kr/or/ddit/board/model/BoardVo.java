@@ -1,7 +1,5 @@
 package kr.or.ddit.board.model;
 
-import lombok.Data;
-
 import java.util.Date;
 
 /**
@@ -20,6 +18,7 @@ public class BoardVo {
 	private String bd_use;
 	private String bd_creator;
 	private Date bd_rdate;
+	
 	public String getBd_no() {
 		return bd_no;
 	}
@@ -61,6 +60,4 @@ public class BoardVo {
 	public BoardVo() {
 		super();
 	}
-	
-	
 }

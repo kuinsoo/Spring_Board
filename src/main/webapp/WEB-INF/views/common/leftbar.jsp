@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <div class="kku-mainSidebar kku-floatLeft kku-boarder">
     <ul class="kku-styleNone kku-boarderUl">
         <li >${memberVo.mem_name}게시판 목록</li>

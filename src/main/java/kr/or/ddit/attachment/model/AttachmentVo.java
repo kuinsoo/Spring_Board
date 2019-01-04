@@ -1,7 +1,5 @@
 package kr.or.ddit.attachment.model;
 
-import lombok.Data;
-
 /**
  * kr.or.ddit.board.model
  * null.java
@@ -47,6 +45,30 @@ public class AttachmentVo {
 	public AttachmentVo(String att_no, String att_postno, String att_att) {
 		this.att_no = att_no;
 		this.att_postno = att_postno;
+		this.att_att = att_att;
+	}
+
+	public String getAtt_no() {
+		return att_no;
+	}
+
+	public void setAtt_no(String att_no) {
+		this.att_no = att_no;
+	}
+
+	public String getAtt_postno() {
+		return att_postno;
+	}
+
+	public void setAtt_postno(String att_postno) {
+		this.att_postno = att_postno;
+	}
+
+	public String getAtt_att() {
+		return att_att;
+	}
+
+	public void setAtt_att(String att_att) {
 		this.att_att = att_att;
 	}
 
